@@ -1,0 +1,16 @@
+/*
+Move files from the main drive to a folder
+*/
+
+function To_Folder(){
+
+var files = DriveApp.getRootFolder().getFiles();
+  while (files.hasNext()){
+  
+  var file = files.next();
+    var destination = DriveApp.getFolderById("id של התיקיה");
+    destination.addFile(file);
+    var pull = DriveApp.getRootFolder();
+    pull.removeFile(file)
+  }
+  }
