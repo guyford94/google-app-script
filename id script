@@ -1,0 +1,57 @@
+/*
+A script that creates a unique ID
+*/
+
+
+
+function add_uid(){
+var uid = create_id();
+var ss = SpreadsheetApp.getActive();
+  var ws = ss.getSheetByName("שם הגיליון");
+  var data = ws.getDataRange().getValues();  
+  var rowNum = data.length;
+  var colNum = data[0].length;
+  ws.getRange(rowNum, colNum).setValue(uid);
+  
+}
+
+function create_id(){
+var script_poperties = PropertiesService.getScriptProperties();
+var Keys = script_poperties.getKeys();
+
+var uid = new_id();
+  
+  if (Keys.indexOf(uid) >= 0){
+    uid = new_id();
+  }
+  else{
+    script_poperties.setProperty(uid, new Date());
+    }
+  
+  return uid;
+  
+}
+
+function getRndNumber(min,max){
+return Math.floor(Math.random() * (max - min + 1) + min);
+
+
+}
+
+
+function new_id(){  
+var rndnum = getRndNumber(1,99999);
+var id = ('0000' + rndnum).slice(-5);
+  id = 'UID' + id;
+ return id;
+
+}
+
+
+
+
+function test(){
+create_id();
+
+
+}
