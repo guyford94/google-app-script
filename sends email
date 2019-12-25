@@ -1,0 +1,46 @@
+/*
+Created by: Guy Ford
+Script sends email according to templates created in Google Sheet and content received in Google Form
+*/
+
+
+function SendEmail() {
+
+  SpreadsheetApp.getActiveSpreadsheet().getSheetByName('form_test').activate();
+  var ss = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var lr = ss.getLastRow();
+  
+  var TemplateText =  SpreadsheetApp.getActiveSpreadsheet().getSheetByName('template').getRange(1, 1).getValue();   //לוקח תוכן מתא בתוך שייט
+  var TemplateSubText =  SpreadsheetApp.getActiveSpreadsheet().getSheetByName('template').getRange(1, 2).getValue();   //לוקח תוכן מתא בתוך שייט 
+  
+  for (var i = 2 ; i<=lr ; i++){
+  
+  var User_Email = ss.getRange(i, 2).getValue();   //מביא את התוכן של עמודה 1
+  var user_name = ss.getRange(i, 3).getValue();      //מביא את התוכן של עמודה 2
+  var First_name = ss.getRange(i, 4).getValue();
+  var Last_Name = ss.getRange(i, 5).getValue();  
+  var path = ss.getRange(i, 6).getValue(); 
+  var uid = ss.getRange(i, 9).getValue(); 
+  var cluster = ss.getRange(i, 7).getValue();   
+  var Confirming_partner = ss.getRange(i, 8).getValue(); 
+ 
+    
+    
+   var subject = TemplateSubText.replace("{path}",path);
+    
+   var messageBody = TemplateText.replace("{Confirming_partner}",Confirming_partner)
+   .replace("{First_name}",First_name)
+   .replace("{Last_Name}",Last_Name)
+   .replace("{path}",path)
+   .replace("{id}",uid)
+   .replace("{cluster}",cluster); //מחליף את התוכן של הטמפלייט; 
+   
+    
+    
+  }
+  
+    MailApp.sendEmail(Confirming_partner,"guyford94@gmail.com", subject, messageBody);
+
+     //Logger.log(SendEmail);
+}
+ 
