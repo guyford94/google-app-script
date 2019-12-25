@@ -1,0 +1,318 @@
+/* 
+Created by Guy Ford.
+Dated 22.12.19.
+Creating folders according to variables that come from Google form
+
+*/
+
+
+
+function myFunction() {
+// משתנים של התיקיות
+// יש להכניס לכל שתנה את הID של התיקיה שלו
+  var Projects = "1lLtJF5GPO8uoeGi2RUEFMOhM2fWqqRDi"
+  var Proposals = "1R1nVdOuxVaBpdg2UkH4TMm17YDQe8HNQ"
+  
+  
+
+  var Projects_Valuation_English = "14yRbOdbu77r5s82DYPpU4Cd1khwczjNd"
+  var Projects_Valuation_Hebrew = "14jdI3W8vRfGK7Ck2BA2-7pXPEVMp_jAc"
+  var Projects_PPA_English = "14YLGaQbwheixRrPZ9MKzXfpPdev38PHZ"
+  var Projects_PPA_Hebrew = "14SoNOxBb3vZoy3oN3l2-QasuxfVQm6FN"
+  var Projects_Accounting_English = "13fFxr5faFgM4heV9sRPebTs62EqEdT5Q"
+  var Projects_Accounting_Hebrew = "13fX2ayaRQTubZhhF03RFk13nsfZGzFbH"
+  var Projects_Options_and_Finance_English = "14HSw3xiCMRhgflFJWmfW5jyiHDaRwlzi"
+  var Projects_Options_and_Finance_Hebrew = "14NrOrhRo3jENafdCDvkV23WQJfPszfd3"
+  var Projects_LS_English = "12rRNTyXHgq6ltLQ4FlNSFXqK5TK0O6qK"
+  var Projects_LS_Hebrew = "1wooOdG7yTVu8a11hzD4czzuJR-MD7u_N"
+  var Projects_Impairment_English = "14Ft-r9BcicZVmsNLkZLihJo_M5W0WA9G"
+  var Projects_Impairment_Hebrew = "148nKxPYBngd93EAh4XK8dnTedTkrn_yv"
+  var Projects_Consulting_English = "14GFahI16Qcy_sNFBYqIS-sxUW_0KYdu5"
+  var Projects_Consulting_Hebrew = "14FtiWDNHju1Js8FfdFYF120r2oRhkzDs"
+  var Projects_Compensation_English = "143WfYXZt0bFz7ML8FBWuQb9zPQtAoVNM"
+  var Projects_Compensation_Hebrew = "140VAVsfQELu5AA0jBFBnJA28COzosITL"
+  var Projects_CH1_English = "13laeArl-kTzvyghNaVpwwKiyp9VD2rqU" 
+  var Projects_CH1_Hebrew = "13iT9agR8Xok-gTZ6MWpmSzsQo-fhwx3j" 
+
+  var Proposals_Valuation_English = "16YmvAyscGkYPp4aNfY95Rjs98s8jDDVe"
+  var Proposals_Valuation_Hebrew = "16WWg7ozc1P2Zvld-AS_0e2c-y0ZPrk98"
+  var Proposals_PPA_English = "16QI4IXkHesKZ4xAoQ4o7iUjq5aax-Zuw"
+  var Proposals_PPA_Hebrew = "16J_PUVXpvnp8raUDDK7a_tm6WsbEF664"
+  var Proposals_Accounting_English = "152Tq6Irc8oUptLRQxoNdUd3zs5lhUwi4"
+  var Proposals_Accounting_Hebrew = "155N6Yrl93ZC2x9L1kyhmy5zgBUNwk0-q"
+  var Projects_Options_and_Finance_English = "16CXoAf2_BDVlPHFgMEXkkoAVTkBueG9d"
+  var Projects_Options_and_Finance_Hebrew = "15v2MX-bgMs_DfaWUCK2wivgRmGsUd88a"
+  var Proposals_LS_English = "15qo6QAtggCGF0Un648_vlPn11cc9q97V"
+  var Proposals_LS_Hebrew = "15kX6NcyIzBHiVHt7U517FR-VbdKIBdw3"
+  var Proposals_Impairment_English = "15gs9zMMlD6FR6qRCOlAmu3pdqj82r7tQ"
+  var Proposals_Impairment_Hebrew = "15f4Y2h3RKYceSACVpqrv6r7X1ujqBSML"
+  var Proposals_Consulting_English = "15THRo--2FUOooPKuTfvx-Mo8INZqXHJN"
+  var Proposals_Consulting_Hebrew = "15NnC6scrYoVengfGM63oq7XumfqhuWlI"
+  var Proposals_Compensation_English = "15Ni4fREPIY_kISmCtqHh4Mo11RRqnrEO"
+  var Proposals_Compensation_Hebrew = "15KKFPuzvW0EYJ5SbxJFTvPj1Hz-TLRW9"
+  var Proposals_CH1_English = "15F0IjIZ3x13h76u72_YCSo6V4c3IOKmZ" 
+  var Proposals_CH1_Hebrew = "15Et9Xbqt6kU7pAftvGCzJ1C0IjVQQMmt" 
+    
+
+  
+
+
+  SpreadsheetApp.getActiveSpreadsheet().getSheetByName('VAB-RE');
+  var ss = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var lr = ss.getLastRow();
+  
+   for (var i = 2 ; i<=lr ; i++){
+  
+  var customers_name = ss.getRange(i, 3).getValue();   //מביא את התוכן של עמודה 1
+  var Hebrew_English = ss.getRange(i, 4).getValue();      //מביא את התוכן של עמודה 2
+  var Folder  = ss.getRange(i, 6).getValue();
+  var Type_of_service = ss.getRange(i, 5).getValue();  
+
+     
+   }
+
+
+  
+  
+  if(Folder == "Projects"){
+    if(Type_of_service == 'Valuation'){
+      if(Hebrew_English == 'Hebrew'){
+       DriveApp.getFolderById(Projects_Valuation_Hebrew)  
+       Create_customers(Projects_Valuation_Hebrew)
+     }
+      else{
+       DriveApp.getFolderById(Projects_Valuation_English)
+       Create_customers(Projects_Valuation_English)
+      }
+    }
+    if(Type_of_service == 'PPA'){
+      if(Hebrew_English == 'Hebrew'){
+       DriveApp.getFolderById(Projects_PPA_Hebrew)
+       Create_customers(Projects_PPA_Hebrew)        
+      }
+      else{
+       DriveApp.getFolderById(Projects_PPA_English)
+       Create_customers(Projects_PPA_English)      
+      }    
+    
+    }   
+    if(Type_of_service == 'Accounting'){
+      if(Hebrew_English == 'Hebrew'){
+       DriveApp.getFolderById(Projects_Accounting_Hebrew )
+       Create_customers(Projects_Accounting_Hebrew)           
+      }
+      else{
+       DriveApp.getFolderById(Projects_Accounting_English)
+       Create_customers(Projects_Accounting_English)         
+      }    
+    
+    }  
+    if(Type_of_service == 'Options and Finance' ){
+      if(Hebrew_English == 'Hebrew'){
+       DriveApp.getFolderById(Projects_Options_and_Finance_Hebrew)
+       Create_customers(Projects_Options_and_Finance_Hebrew)           
+      }
+      else{
+       DriveApp.getFolderById(Projects_Options_and_Finance_English)
+       Create_customers(Projects_Options_and_Finance_English)         
+      }    
+    
+    }    
+    if(Type_of_service == 'LS'){
+      if(Hebrew_English == 'Hebrew'){
+       DriveApp.getFolderById(Projects_LS_Hebrew)
+       Create_customers(Projects_LS_Hebrew)           
+      }
+      else{
+       DriveApp.getFolderById(Projects_LS_English)
+       Create_customers(Projects_LS_English)         
+      }    
+    
+    }    
+    if(Type_of_service == 'Impairment'){
+      if(Hebrew_English == 'Hebrew'){
+       DriveApp.getFolderById(Projects_Impairment_Hebrew)
+       Create_customers(Projects_Impairment_Hebrew)           
+      }
+      else{
+       DriveApp.getFolderById(Projects_Impairment_English)
+       Create_customers(Projects_Impairment_English)         
+      }    
+    
+    }    
+    if(Type_of_service == 'Consulting'){
+      if(Hebrew_English == 'Hebrew'){
+       DriveApp.getFolderById(Projects_Consulting_Hebrew)
+       Create_customers(Projects_Consulting_Hebrew)           
+      }
+      else{
+       DriveApp.getFolderById(Projects_Consulting_English)
+       Create_customers(Projects_Consulting_English)         
+      }    
+    
+    }    
+    if(Type_of_service == 'Compensation'){
+      if(Hebrew_English == 'Hebrew'){
+       DriveApp.getFolderById(Projects_Compensation_Hebrew)
+       Create_customers(Projects_Compensation_Hebrew)           
+      }
+      else{
+       DriveApp.getFolderById(Projects_Compensation_English)
+       Create_customers(Projects_Compensation_English)         
+      }    
+    
+    }
+
+    if(Type_of_service == 'CH1'){
+      if(Hebrew_English == 'Hebrew'){
+       DriveApp.getFolderById(Projects_CH1_Hebrew )
+       Create_customers(Projects_CH1_Hebrew)           
+      }
+      else{
+       DriveApp.getFolderById(Projects_CH1_English )
+       Create_customers(Projects_CH1_English)         
+      }    
+    
+    }
+
+  }
+  
+  else{
+   if(Type_of_service == 'Valuation'){
+      if(Hebrew_English == 'Hebrew'){
+       DriveApp.getFolderById(Proposals_Valuation_Hebrew )  
+       Create_customers(Proposals_Valuation_Hebrew)
+     }
+      else{
+       DriveApp.getFolderById(Proposals_Valuation_English)
+       Create_customers(Proposals_Valuation_English )
+      }
+    }
+    if(Type_of_service == 'PPA'){
+      if(Hebrew_English == 'Hebrew'){
+       DriveApp.getFolderById(Proposals_PPA_Hebrew )
+       Create_customers(Proposals_PPA_Hebrew)        
+      }
+      else{
+       DriveApp.getFolderById(Proposals_PPA_English )
+       Create_customers(Proposals_PPA_English)      
+      }    
+    
+    }   
+    if(Type_of_service == 'Accounting'){
+      if(Hebrew_English == 'Hebrew'){
+       DriveApp.getFolderById(Proposals_Accounting_Hebrew)
+       Create_customers(Proposals_Accounting_Hebrew)           
+      }
+      else{
+       DriveApp.getFolderById(Proposals_Accounting_English)
+       Create_customers(Proposals_Accounting_English)         
+      }    
+    
+    }  
+    if(Type_of_service == 'Options and Finance' ){
+      if(Hebrew_English == 'Hebrew'){
+       DriveApp.getFolderById(Projects_Options_and_Finance_Hebrew )
+       Create_customers(Projects_Options_and_Finance_Hebrew)           
+      }
+      else{
+       DriveApp.getFolderById(Projects_Options_and_Finance_English )
+       Create_customers(Projects_Options_and_Finance_English)         
+      }    
+    
+    }    
+    if(Type_of_service == 'LS'){
+      if(Hebrew_English == 'Hebrew'){
+       DriveApp.getFolderById(Proposals_LS_Hebrew )
+       Create_customers(Proposals_LS_Hebrew)           
+      }
+      else{
+       DriveApp.getFolderById(Proposals_LS_English )
+       Create_customers(Proposals_LS_English)         
+      }    
+    
+    }    
+    if(Type_of_service == 'Impairment'){
+      if(Hebrew_English == 'Hebrew'){
+       DriveApp.getFolderById(Proposals_Impairment_Hebrew )
+       Create_customers(Proposals_Impairment_Hebrew)           
+      }
+      else{
+       DriveApp.getFolderById(Proposals_Impairment_English )
+       Create_customers(Proposals_Impairment_English)         
+      }    
+    
+    }    
+    if(Type_of_service == 'Consulting'){
+      if(Hebrew_English == 'Hebrew'){
+       DriveApp.getFolderById(Proposals_Consulting_Hebrew )
+       Create_customers(Proposals_Consulting_Hebrew)           
+      }
+      else{
+       DriveApp.getFolderById(Proposals_Consulting_English )
+       Create_customers(Proposals_Consulting_English)         
+      }    
+    
+    }    
+    if(Type_of_service == 'Compensation'){
+      if(Hebrew_English == 'Hebrew'){
+       DriveApp.getFolderById(Proposals_Compensation_Hebrew )
+       Create_customers(Proposals_Compensation_Hebrew)           
+      }
+      else{
+       DriveApp.getFolderById(Proposals_Compensation_English )
+       Create_customers(Proposals_Compensation_English)         
+      }    
+    
+    }
+
+    if(Type_of_service == 'CH1'){
+      if(Hebrew_English == 'Hebrew'){
+       DriveApp.getFolderById(Proposals_CH1_Hebrew )
+       Create_customers(Proposals_CH1_Hebrew)           
+      }
+      else{
+       DriveApp.getFolderById(Proposals_CH1_English )
+       Create_customers(Proposals_CH1_English)         
+      }    
+  
+  
+  }
+
+   
+  
+}
+
+}
+
+
+
+
+
+
+
+function Create_customers(id) {
+  
+  SpreadsheetApp.getActiveSpreadsheet().getSheetByName('VAB-RE');
+  var ss = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var lr = ss.getLastRow();
+  
+  for (var i = 2 ; i<=lr ; i++){
+   var customers_name = ss.getRange(i, 3).getValue();
+  }  
+  
+  Logger.log(id)
+var drive = DriveApp.getFolderById(id) 
+var customer_folder = drive.createFolder(customers_name)
+var customer_folder_Data_collected = customer_folder.createFolder('Data collected')
+var customer_folder_Data_received = customer_folder.createFolder('Data received')
+var customer_folder_Deliverable = customer_folder.createFolder('Deliverable')
+var customer_folder_Model = customer_folder.createFolder('Model')
+var customer_folder_Map_Frisk = customer_folder.createFolder('Map&Frisk')
+var customer_folder_Q_A = customer_folder.createFolder('Q&A')
+var customer_folder_Send_to_client = customer_folder.createFolder('Send to client')
+var customer_folder_Final = customer_folder.createFolder('Final')
+Logger.log(customers_name)
+
+}
+    
