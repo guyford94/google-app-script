@@ -1,0 +1,19 @@
+/*
+Created by: Guy Ford
+Script that fill Down Range formula
+*/
+
+function fill_Down_Range_formula(){
+  var ss_1 = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  ss_1.getRange( שורה, עמודה).getFormula("נוסחה");
+  
+  
+  var lr = ss.getLastRow();
+  var fillDownRange = ss.getRange(a1Notation);
+  ss.getRange(a1Notation).copyTo(fillDownRange);
+  
+
+
+
+
+}
