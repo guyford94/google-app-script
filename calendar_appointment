@@ -1,0 +1,63 @@
+/***********************************************************************************************************************************
+Created by Guy Ford
+On: 18.6.20
+The purpose of the script is to create a calendar appointment by Google form and test that there are no overlaps between appointments
+*************************************************************************************************************************************/
+function Order_a_computer_for_YT() {
+  //The correct year must be updated
+  var year = " 2020 ";
+  //The ID of the desired journal must be entered
+  var calender =CalendarApp.getCalendarById("pwc.com_0ldidd8p8s1d65v0efalh8rmfc@group.calendar.google.com");
+  var ss = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var lr = ss.getLastRow();
+ 
+ 
+  
+  //Follows the last line entered
+  for (var i = 2 ; i<=lr ; i++){
+    var User_Email = ss.getRange(i, 2).getValue();   //מביא את התוכן של עמודה 1
+    var computer_number = ss.getRange(i, 3).getValue();      //מביא את התוכן של עמודה 2
+    var month = ss.getRange(i, 4).getValue();
+    var day = ss.getRange(i, 5).getValue();
+    var start_time = ss.getRange(i, 6).getValue();  
+    var end_time = ss.getRange(i, 7).getValue(); 
+    var Date_s = new Date( month + day + year + start_time);
+    var Date_e = new Date( month + day + year + end_time);
+    var title_new = "Computer number " + computer_number + " Saved to user " + User_Email + " on the " + "2020 " + month+ " " + day + " " + start_time + " " + end_time;
+    //Test variable
+    var Chek = 0;
+
+ //Checks whether there is an overlapping order
+   for(var j = 2 ; j<lr ; j++){
+   var computer_number_c = ss.getRange(j, 3).getValue();      //מביא את התוכן של עמודה 2
+   var month_c = ss.getRange(j, 4).getValue();
+   var day_c = ss.getRange(j, 5).getValue();
+   var start_time_c = ss.getRange(j, 6).getValue();  
+   var end_time_c = ss.getRange(j, 7).getValue(); 
+
+   if(month == month_c && day==day_c && computer_number==computer_number_c && (start_time_c<=start_time || start_time <end_time_c)){
+         Chek = 1;
+ 
+     }
+   else{
+       Chek = 0;
+     } 
+  
+   }
+
+   } 
+  //Operation according to the value of Chek
+  if(Chek == 1){
+      MailApp.sendEmail(User_Email, "Order a computer" , "The computer you ordered or the date is already occupied Please check the calender for free time or free computers")
+     }
+  else{
+      calender.createEvent(title_new, Date_s, Date_e).addGuest(User_Email).addPopupReminder(20).addEmailReminder(20);
+
+  }
+
+  
+
+  
+  
+  
+}
